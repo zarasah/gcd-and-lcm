@@ -4,12 +4,27 @@ const secondNum = document.getElementById('secondNumber');
 const resultBtn = document.getElementById('calculate');
 const answer = document.getElementById('answer');
 
+function  factors (number) {
+    let arr = [];
+
+    for (let i = 1; i**2 < number; i++) {
+        if (number % i === 0) {
+            arr.push(i);
+            arr.push(number/i);
+        }
+    }
+    return arr.sort((a, b) => b - a);
+}
+
 function findGCD (a, b) {
     const num = a > b ? b : a;
+    const max = Math.max(a, b);
 
-    for (let i = num; i > 1; i--) {
-        if (a % i === 0 && b % i === 0) {
-            return i;
+    const factorsArr = factors(num);
+
+    for (let i = 0; i < factorsArr.length; i++) {
+        if (max % factorsArr[i] === 0) {
+            return factorsArr[i];
         }
     }
     return 1;
